@@ -78,7 +78,7 @@ LimitXMLRequestBody 0
 <IfModule mod_rewrite.c>
   Options +FollowSymLinks
   RewriteEngine On
-  RewriteBase /
+  RewriteBase /images
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ index.php?kohana_uri=$1 [QSA,PT,L]

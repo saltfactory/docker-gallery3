@@ -77,17 +77,20 @@ RUN make distclean
 RUN hash -r
 
 RUN git clone git://github.com/gallery/gallery3.git
-RUN mv gallery3 /var/www/html/gallery3
+RUN mv gallery3 /var/www/html/images
 
-VOLUME ["/var/www/html/gallery3/var"]
+VOLUME ["/var/www/html/images/var", "/var/log/apache2"]
+ADD htaccess /var/www/html/images/.htaccess
 
 RUN chown -R www-data:www-data /var/www/html*
 
 ADD php.ini /etc/php5/apache2/php.ini
+ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
+RUN a2enmod rewrite
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT /entrypoint.sh
 
 EXPOSE 80
-EXPOSE 2222
+#EXPOSE 2222
